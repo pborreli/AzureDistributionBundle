@@ -42,8 +42,7 @@ class VendorRoleFilesListener
     {
         $io = $event->getIo();
         $io->write('<info>Generating vendor/azureRoleFiles.txt for Azure deployment</info>', true);
-        $im = $event->getComposer()->getInstallationManager();
-        $vendorPath = $im->getVendorPath(true);
+        $vendorPath = $event->getComposer()->getConfig()->get('vendor-dir');
         self::generateVendorRolesFile($vendorPath);
     }
 
