@@ -139,7 +139,7 @@ class AzureSDKCommandBuilder
             $script .= ' '.implode(' ', array_map(array($this, 'escape'), $arguments));
         }
         $script = 'cmd /V:ON /E:ON /C "'.$script.'"';
-        return new Process($script, null, null, null, 60, $options);
+        return new Process($script, null, null, null, 300, $options);
     }
 
     private function escape($element)
