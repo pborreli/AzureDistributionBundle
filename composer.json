@@ -7,7 +7,7 @@
         {"name": "Benjamin Eberlei", "email": "kontakt@beberlei.de"}
     ],
     "require": {
-        "symfony/symfony": ">=2.1.0",
+        "symfony/symfony": ">=2.3.0",
         "microsoft/windowsazure": "dev-master"
     },
     "repositories": [

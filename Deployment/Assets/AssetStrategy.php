@@ -14,7 +14,7 @@
 namespace WindowsAzure\DistributionBundle\Deployment\Assets;
 
 use Symfony\Component\Finder\Finder;
-use Assetic\Util\PathUtils;
+use Assetic\Util\VarUtils;
 use Assetic\AssetWriter;
 use Assetic\Asset\AssetInterface;
 use Assetic\Factory\LazyAssetManager;
@@ -85,7 +85,7 @@ abstract class AssetStrategy
             $asset->setValues($combination);
 
             $target = rtrim($documentRoot, '/').'/'.str_replace('_controller/', '',
-                PathUtils::resolvePath($asset->getTargetPath(), $asset->getVars(),
+                VarUtils::resolve($asset->getTargetPath(), $asset->getVars(),
                     $asset->getValues()));
 
             if (!is_dir($dir = dirname($target))) {
