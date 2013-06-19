@@ -4,7 +4,7 @@
 // Env Variable 'ApplicationPath' is set by the add_environment_variables.ps1
 // script. The others are "default" paths of Azure that can be tried as
 // fallback.
-if (isset($_SERVER['ApplicationPath'])) {
+if (isset($_SERVER['ApplicationPath']) && file_exists($_SERVER['ApplicationPath'])) {
     $appRoot = $_SERVER['ApplicationPath'] . '\app';
 } else if ( file_exists("E:\approot\app")) {
     $appRoot = "E:\approot\app";
@@ -26,4 +26,3 @@ $kernel->loadClassCache();
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
-
