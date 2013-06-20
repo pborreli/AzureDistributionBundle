@@ -100,6 +100,7 @@ class PackageCommand extends ContainerAwareCommand
         $serviceConfiguration->copyForDeployment($outputDir, $input->getOption('dev-fabric'));
 
         $output->writeln('Calling cspack.exe to build Azure Package:');
+        $s = microtime(true);
         $azureCmdBuilder = $this->getContainer()->get('windows_azure_distribution.deployment.azure_sdk_command_builder');
         $args = $azureCmdBuilder->buildPackageCmd($serviceDefinition, $outputFile, $input->getOption('dev-fabric'));
         $process = $azureCmdBuilder->getProcess($args);// @todo: Update to ProcessBuilder in 2.1 Symfony
@@ -110,7 +111,7 @@ class PackageCommand extends ContainerAwareCommand
         }
 
         $output->writeln( trim($process->getOutput()) );
-        $output->writeln('Completed.');
+        $output->writeln('Completed. (Took ' . number_format(microtime(true) - $s, 4) . ' seconds)');
     }
 
     private function rmdir($dir, $recursive = true)
