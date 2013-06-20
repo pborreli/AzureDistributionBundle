@@ -211,7 +211,7 @@ class ServiceDefinition
                 continue;
             }
             $seenDirs[$dir] = $roleFilePath;
-            $roleFile = $this->computeRoleFileContents($dir, $roleName, $outputDir);
+            $roleFile = $this->computeRoleFileContents($dir, $roleName, $outputDir, $longPaths);
 
             file_put_contents($roleFilePath, $roleFile);
         }
@@ -230,7 +230,7 @@ class ServiceDefinition
      * @param string $outputPath
      * @return string
      */
-    private function computeRoleFileContents($dir, $roleName, $outputDir)
+    private function computeRoleFileContents($dir, $roleName, $outputDir, $longPaths)
     {
         $roleFile = "";
         $iterator = $this->getIterator($dir);
@@ -276,9 +276,19 @@ class ServiceDefinition
             unset($subdirs["vendor"]);
         }
 
+        // Getting root files
+        $filesFinder = new Finder();
+        $filesIterator = $filesFinder->files()
+                                     ->in($dir)
+                                     ->depth('== 0')
+                                     ->ignoreDotFiles(true)
+                                     ->ignoreVCS($this->roleFiles['ignoreVCS']);
+
+        // Getting files in subdirs
         $finder = new Finder();
         $iterator = $finder->files()
                            ->in($subdirs)
+                           ->append($filesIterator)
                            ->ignoreDotFiles(false)
                            ->ignoreVCS($this->roleFiles['ignoreVCS']);
         foreach ($this->roleFiles['exclude'] as $exclude) {
