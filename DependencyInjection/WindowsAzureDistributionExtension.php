@@ -160,7 +160,6 @@ class WindowsAzureDistributionExtension extends Extension
                 $definition = new Definition('%windows_azure_distribution.session_handler.pdo.class%');
                 $definition->setArguments(array(
                     new Reference('windows_azure_distribution.session.pdo'),
-                    $container->getParameter('session.storage.options'),
                     array('db_table' => $sessionConfig['database']['table'])
                 ));
 
