@@ -37,6 +37,7 @@ class PackageCommand extends ContainerAwareCommand
             ->addOption('dev-fabric', null, InputOption::VALUE_NONE, 'Build package for dev-fabric? This will only copy the files and startup the Azure Simulator.')
             ->addOption('output-dir', null, InputOption::VALUE_REQUIRED, 'Output directory. Will override the default directory configured as approot/build.')
             ->addOption('skip-role-file-generation', null, InputOption::VALUE_NONE, 'Skip the generation of role files for the /roleFiles argument of cspack.exe. This will reuse old existing files.')
+            ->addOption('timeout', null, InputOption::VALUE_OPTIONAL, 'Timeout for process execution to generate package', 60)
         ;
     }
 
@@ -104,6 +105,7 @@ class PackageCommand extends ContainerAwareCommand
         $azureCmdBuilder = $this->getContainer()->get('windows_azure_distribution.deployment.azure_sdk_command_builder');
         $args = $azureCmdBuilder->buildPackageCmd($serviceDefinition, $outputFile, $input->getOption('dev-fabric'));
         $process = $azureCmdBuilder->getProcess($args);// @todo: Update to ProcessBuilder in 2.1 Symfony
+        $process->setTimeout($input->getOption('timeout'));
         $process->run();
 
         if ( ! $process->isSuccessful()) {
