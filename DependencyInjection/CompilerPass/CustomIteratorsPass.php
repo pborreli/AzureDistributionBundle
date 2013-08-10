@@ -13,17 +13,31 @@ class CustomIteratorsPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $deploymentDefinition = $container->getDefinition('windows_azure_distribution.deployment');
-        $options = $deploymentDefinition->getArgument(2);
-        
+        $container->setParameter(
+            'windows_azure_distribution.config.deployment', 
+            $this->mergeOptions(
+                $container,
+                $container->getParameter('windows_azure_distribution.config.deployment')
+            )
+        );
+    }
+    
+    /**
+     * @param ContainerBuilder $container
+     * @param array $options
+     * @return array
+     */
+    protected function mergeOptions(ContainerBuilder $container, array $options)
+    {
         if (!array_key_exists('customIterators', $options)) {
             $options['customIterators'] = array();
         }
+        
         foreach ($container->findTaggedServiceIds('windows_azure_distribution.custom_iterator') as $serviceId) {
             $options['customIterators'][] = new Reference($serviceId);
         }
         
-        $deploymentDefinition->replaceArgument(2, $options);
+        return $options;
     }
 }
 
