@@ -18,6 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 use WindowsAzure\DistributionBundle\DependencyInjection\CompilerPass\ShardingPass;
 use WindowsAzure\DistributionBundle\DependencyInjection\CompilerPass\CustomIteratorsPass;
+use WindowsAzure\DistributionBundle\DependencyInjection\CompilerPass\PackageCompilersPass;
 use WindowsAzure\DistributionBundle\Blob\Stream;
 
 class WindowsAzureDistributionBundle extends Bundle
@@ -41,6 +42,7 @@ class WindowsAzureDistributionBundle extends Bundle
 
         $container->addCompilerPass(new ShardingPass());
         $container->addCompilerPass(new CustomIteratorsPass());
+        $container->addCompilerPass(new PackageCompilersPass());
     }
 }
 

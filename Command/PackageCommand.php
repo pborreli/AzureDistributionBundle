@@ -85,14 +85,13 @@ class PackageCommand extends ContainerAwareCommand
         }
 
         $output->writeln('Compiling assets for build ' . $buildNumber);
-        $webRoleStrategy = $this->getContainer()->get('windows_azure_distribution.assets');
+        $webRoleStrategy = $this->getContainer()->get('windows_azure_distribution.assets'); // TODO: passer par un package compiler
         foreach ($serviceDefinition->getPhysicalDirectories() as $dir) {
             $webRoleStrategy->deploy($dir, $buildNumber);
         }
         
-        foreach ($this->getContainer()->findTaggedServiceIds('windows_azure_distribution.package_compiler') as $serviceId) {
-            $service = $this->getContainer()->get($serviceId);
-            $service->compileDependencies($serviceDefinition, $buildNumber);
+        foreach ($this->getContainer()->get('windows_azure_distribution.package_compiler')->getCompilers() as $compiler) {
+            $compiler->compileDependencies($serviceDefinition, $buildNumber);
         }
 
         if ( ! $input->getOption('skip-role-file-generation')) {

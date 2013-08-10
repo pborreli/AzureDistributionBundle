@@ -39,6 +39,9 @@
             <argument>%windows_azure_distribution.config.deployment%</argument>
             <argument>%windows_azure_distribution.config.diagnostics.storage%</argument>
         </service>
+        
+        <service id="windows_azure_distribution.package_compiler" class="WindowsAzure\DistributionBundle\Deployment\PackageCompiler">
+        </service>
 
         <service id="windows_azure_distribution.assets.local" class="%windows_azure_distribution.assets.local.class%">
             <argument type="service" id="service_container" />
