@@ -33,7 +33,7 @@ class CustomIteratorsPass implements CompilerPassInterface
             $options['customIterators'] = array();
         }
         
-        foreach ($container->findTaggedServiceIds('windows_azure_distribution.custom_iterator') as $serviceId) {
+        foreach ($container->findTaggedServiceIds('windows_azure_distribution.custom_iterator') as $serviceId => $attributes) {
             $options['customIterators'][] = new Reference($serviceId);
         }
         

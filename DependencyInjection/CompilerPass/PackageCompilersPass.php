@@ -15,7 +15,7 @@ class PackageCompilersPass implements CompilerPassInterface
     {
         $packageCompilers = array();
         
-        foreach ($container->findTaggedServiceIds('windows_azure_distribution.package_compiler') as $serviceId) {
+        foreach ($container->findTaggedServiceIds('windows_azure_distribution.package_compiler') as $serviceId => $attributes) {
             $packageCompilers[] = new Reference($serviceId);
         }
         
