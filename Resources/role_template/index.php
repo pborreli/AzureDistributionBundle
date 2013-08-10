@@ -26,4 +26,4 @@ $kernel->loadClassCache();
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
-$response->terminate();
+$kernel->terminate($request, $response);
