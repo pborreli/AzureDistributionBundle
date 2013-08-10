@@ -36,11 +36,16 @@ class ServiceDefinition
      * @var array
      */
     private $roleFiles = array();
+    
+    /**
+     * @var array
+     */
+    private $customIterators = array();
 
     /**
      * @param string $serviceDefinitionFile
      */
-    public function __construct($serviceDefinitionFile, array $roleFiles = array())
+    public function __construct($serviceDefinitionFile, array $roleFiles = array(), array $customIterators = array())
     {
         if (!file_exists($serviceDefinitionFile)) {
             throw new \InvalidArgumentException(sprintf(
@@ -50,6 +55,9 @@ class ServiceDefinition
         }
 
         $this->serviceDefinitionFile = $serviceDefinitionFile;
+        
+        $this->customIterators = $customIterators;
+
         $this->dom = new \DOMDocument('1.0', 'UTF-8');
         $this->dom->load($this->serviceDefinitionFile);
 
@@ -230,7 +238,7 @@ class ServiceDefinition
      * @param string $outputPath
      * @return string
      */
-    private function computeRoleFileContents($dir, $roleName, $outputDir, $longPaths)
+    private function computeRoleFileContents($dir, $roleName, $outputDir, array &$longPaths)
     {
         $roleFile = "";
         $iterator = $this->getIterator($dir);
@@ -276,21 +284,15 @@ class ServiceDefinition
             unset($subdirs["vendor"]);
         }
 
-        // Getting root files
-        $filesFinder = new Finder();
-        $filesIterator = $filesFinder->files()
-                                     ->in($dir)
-                                     ->depth('== 0')
-                                     ->ignoreDotFiles(true)
-                                     ->ignoreVCS($this->roleFiles['ignoreVCS']);
-
         // Getting files in subdirs
         $finder = new Finder();
         $iterator = $finder->files()
                            ->in($subdirs)
-                           ->append($filesIterator)
                            ->ignoreDotFiles(false)
                            ->ignoreVCS($this->roleFiles['ignoreVCS']);
+        foreach ($this->customIterators as $customIterator) {
+            $iterator->append($customIterator->getIterator($dirs, $subdirs)); // TODO: send the finder?
+        }
         foreach ($this->roleFiles['exclude'] as $exclude) {
             $iterator->exclude($exclude);
         }
