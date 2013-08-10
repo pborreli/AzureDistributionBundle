@@ -161,8 +161,10 @@ class AzureDeployment
     {
         if ( ! $this->serviceDefinition) {
             $roleFiles = isset($this->options['roleFiles']) ? $this->options['roleFiles'] : array();
-            $this->serviceDefinition = new ServiceDefinition($this->configDir . '/ServiceDefinition.csdef', $roleFiles);
+            $customIterators = array_key_exists('customIterators', $this->options) ? $this->options['customIterators'] : array();
+            $this->serviceDefinition = new ServiceDefinition($this->configDir . '/ServiceDefinition.csdef', $roleFiles, $customIterators); // TODO: use service
         }
+
         return $this->serviceDefinition;
     }
 
