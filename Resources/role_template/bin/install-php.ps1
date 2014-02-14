@@ -19,8 +19,10 @@ if ((Test-Path $myPhpIniFile) -eq 'True') {
 	$additionalPhpIniDirectives = Get-Content $myPhpIniFile
 	$additionalPhpIniDirectives = $additionalPhpIniDirectives.Replace("%EXT%", $phpExtensionsPath)
 
-	Add-Content $phpIniFile "`r`n"
-	Add-Content $phpIniFile $additionalPhpIniDirectives
+	if (!(cat $phpIniFile | Select-String 'PhpAzureChanges')) {
+		Add-Content $phpIniFile "`r`n"
+		Add-Content $phpIniFile $additionalPhpIniDirectives
+	}
 }
 	
 # Copy and register extensions
