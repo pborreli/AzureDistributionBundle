@@ -68,7 +68,7 @@ class ServiceDefinition
     {
         $this->roleFiles = array(
             'ignoreVCS' => (isset($roleFiles['ignoreVCS'])) ? $roleFiles['ignoreVCS'] : true,
-            'exclude' => array('build', 'cache', 'logs', 'tests', 'Tests', 'docs', 'test-suite', 'role_template'),
+            'exclude' => array('build', 'cache/dev', 'cache/prod', 'cache/azure', 'logs', 'tests', 'Tests', 'docs', 'test-suite', 'role_template'),
             'notName' => array('#(.*)\.swp$#')
         );
         if (isset($roleFiles['exclude'])) {
