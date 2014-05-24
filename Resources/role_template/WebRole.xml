@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WebRole name="" enableNativeCodeExecution="true">
+<WebRole name="" enableNativeCodeExecution="true" vmsize="Small">
     <Sites>
         <Site name="Web" physicalDirectory="">
             <Bindings>

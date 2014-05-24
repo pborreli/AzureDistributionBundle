@@ -14,7 +14,12 @@ if (isset($_SERVER['ApplicationPath']) && file_exists($_SERVER['ApplicationPath'
     $appRoot = __DIR__ . '\..\..\approot\app';
 }
 
-require_once $appRoot . '\bootstrap.php.cache';
+use Symfony\Component\ClassLoader\ApcClassLoader;
+
+$loader = require_once $appRoot . '\bootstrap.php.cache';
+$loader = new ApcClassLoader('azure', $loader);
+$loader->register(true);
+
 require_once $appRoot . '\AppKernel.php';
 //require_once $appRoot . '\AppCache.php';
 

@@ -26,6 +26,7 @@ use WindowsAzure\DistributionBundle\Deployment\BuildNumber;
  * Package a Symfony application for deployment.
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
+ * @author Stéphane Escandell <stephane.escandell@gmail.com>
  */
 class PackageCommand extends ContainerAwareCommand
 {
