@@ -19,6 +19,7 @@ use Symfony\Component\Finder\Finder;
  * Wraps the ServiceDefinition.csdef file and allows convenient access.
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
+ * @author Stéphane Escandell <stephane.escandell@gmail.com>
  */
 class ServiceDefinition
 {
@@ -68,7 +69,7 @@ class ServiceDefinition
     {
         $this->roleFiles = array(
             'ignoreVCS' => (isset($roleFiles['ignoreVCS'])) ? $roleFiles['ignoreVCS'] : true,
-            'exclude' => array('build', 'cache/dev', 'cache/prod', 'cache/azure', 'logs', 'tests', 'Tests', 'docs', 'test-suite', 'role_template'),
+            'exclude' => array('build', 'cache/dev', 'cache/prod', 'cache/azure', 'logs', 'tests', 'Tests', 'TestsProject', 'docs', 'test-suite', 'role_template'),
             'notName' => array('#(.*)\.swp$#')
         );
         if (isset($roleFiles['exclude'])) {

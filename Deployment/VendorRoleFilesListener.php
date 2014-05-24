@@ -21,6 +21,7 @@ use Symfony\Component\Finder\Finder;
  * packaging and considerably speed up the operation.
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
+ * @author Stéphane Escandell <stephane.escandell@gmail.com>
  */
 class VendorRoleFilesListener
 {
@@ -54,13 +55,15 @@ class VendorRoleFilesListener
         }
         $dirName = basename($vendorDir);
 
+        // TODO: add options from composer so user can add
+        // personnalized exclude rules.
+        
         $finder = new Finder();
         $finder->files()
                ->in($vendorDir)
                ->ignoreVCS(true)
                ->ignoreDotFiles(false)
-               ->exclude('tests')
-               ->exclude('Tests')
+               ->exclude(array('tests', 'Tests', 'TestsProject'))
                ->exclude('test-suite')
                ->exclude('docs')
                ->notName('#(.*)\.swp$#');

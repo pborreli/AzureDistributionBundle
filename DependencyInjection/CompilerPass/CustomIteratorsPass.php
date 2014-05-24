@@ -7,10 +7,13 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
- * 
+ * @author Stéphane Escandell <stephane.escandell@gmail.com>
  */
 class CustomIteratorsPass implements CompilerPassInterface
 {
+	/**
+	 * @param ContainerBuilder $container
+	 */
     public function process(ContainerBuilder $container)
     {
         $container->setParameter(
