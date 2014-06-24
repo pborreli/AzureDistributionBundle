@@ -191,7 +191,7 @@ class ServiceDefinition
     /**
      * Create the role files for this service definition.
      *
-     * A role file is a semicolon seperated list of target and destination
+     * A role file is a semicolon separated list of target and destination
      * paths. Only these files are then copied during the cspack.exe process to
      * the target deployment directory or package file.
      *

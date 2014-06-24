@@ -13,7 +13,7 @@ class BuildNumberTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testNewBuilNumberIsZero()
+    public function testNewBuildNumberIsZero()
     {
         $number = BuildNumber::createInDirectory(sys_get_temp_dir());
 

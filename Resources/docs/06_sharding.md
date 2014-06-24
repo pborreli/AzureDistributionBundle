@@ -6,7 +6,7 @@ layout: default
 # Sharding
 
 You can use SQL Azure Federations by enabling a shard manager for a Doctrine DBAL
-connection. Specifiy the `federations` key and then keys with the corre
+connection. Specify the `federations` key and then keys with the core
 
     windows_azure_distribution:
         federations:

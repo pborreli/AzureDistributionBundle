@@ -30,12 +30,12 @@ class DeploymentListener
     public function triggerWebsitesFileCopyTask(IOInterface $io)
     {
         if (!isset($_SERVER['DEPLOYMENT_SOURCE']) || !isset($_SERVER['DEPLOYMENT_TARGET'])) {
-            $io->write("[Azure] Detect environemnt: NOT FOUND.");
+            $io->write("[Azure] Detect environment: NOT FOUND.");
             $io->write("[Azure] Skipping Azure Website file copy task");
             return false;
         }
 
-        $io->write("[Azure] Detect environemnt: FOUND.");
+        $io->write("[Azure] Detect environment: FOUND.");
         $io->write("[Azure] Copying files to webroot directory.", true);
 
         $this->task->copyFiles($_SERVER['DEPLOYMENT_SOURCE'], $_SERVER['DEPLOYMENT_TARGET']);

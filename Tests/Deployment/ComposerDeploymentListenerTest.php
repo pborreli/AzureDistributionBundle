@@ -6,7 +6,7 @@ use WindowsAzure\DistributionBundle\Deployment\Composer\DeploymentListener;
 
 class ComposerDeploymentListenerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testPostInstallSkipsIfEvnironmentNotSet()
+    public function testPostInstallSkipsIfEnvironmentNotSet()
     {
         $io = $this->getMock('Composer\IO\IOInterface', array('write'));
         $io->expects($this->any())->method('write');

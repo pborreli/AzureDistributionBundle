@@ -21,7 +21,7 @@ Cloud-Services put constraints on how an application is allowed to run on their 
 * Logging to a central server/blob storage.
 * Diagnostics
 
-Why is this Symfony specific? Generic deployment of PHP applications on Azure requires alot more work, because you can't rely on the conventions of the framework. This bundle makes the Azure experience very smooth, no details about Azure deployment are necessary to get started.
+Why is this Symfony specific? Generic deployment of PHP applications on Azure requires a lot more work, because you can't rely on the conventions of the framework. This bundle makes the Azure experience very smooth, no details about Azure deployment are necessary to get started.
 
 
 Using this kernel is totally optional. You can make the necessary modifications yourself to get the application running on Azure by pointing the log and cache directory to `sys_get_temp_dir()`.
@@ -30,7 +30,7 @@ Using this kernel is totally optional. You can make the necessary modifications 
 
 Windows Azure ships with a concept of roles. You can have different Web- or Worker Roles and each of them can come in one or many instances. Web- and Worker roles don't easily match to a Symfony2 application.
 
-Symfony applications encourage code-reuse while azure roles enforce complete code seperation. You can have a Multi Kernel application in Symfony, but that can still contain both commands (Worker) and controllers (Web).
+Symfony applications encourage code-reuse while azure roles enforce complete code separation. You can have a Multi Kernel application in Symfony, but that can still contain both commands (Worker) and controllers (Web).
 
 Dividing the code that is used on a worker or a web role for Azure will amount to considerable work. However package size has to be taken into account for faster boot operations. This is why the most simple approach to role building with Symfony2 is to ship all the code no matter what the role is. This is how this bundle works by default. If you want to keep the packages smaller you can optionally instruct the packaging to lazily fetch vendors using the Composer library.
 

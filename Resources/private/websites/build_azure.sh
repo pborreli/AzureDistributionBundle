@@ -1,9 +1,9 @@
 #!/bin/bash
-set -e #abort when first programm errors
+set -e #abort when first program errors
 
 exitWithMessageOnError () {
   if [ ! $? -eq 0 ]; then
-    echo "An error has occured during web site deployment."
+    echo "An error has occurred during web site deployment."
     echo $1
     exit 1
   fi

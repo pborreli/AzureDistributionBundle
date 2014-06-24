@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Deloyment on Windows Azure Websites
+title: Deployment on Windows Azure Websites
 ---
 
-# Deloyment on Windows Azure Websites
+# Deployment on Windows Azure Websites
 
 With the June 2012 release Windows Azure includes Websites that allow you deploy projects
 from Git. It is much easier to deploy to than the Azure Cloud Services platform, which
@@ -11,7 +11,7 @@ requires a lot of work on the build and deployment process.
 
 You can use the **AzureDistributionBundle** to deploy your Symfony2 application to
 WindowsAzure Websites. Composer dependencies will be installed on the Azure Websites
-platform during the deloyment, you don't have to check them into your Git repository.
+platform during the deployment, you don't have to check them into your Git repository.
 
 This guide explains:
 
@@ -68,7 +68,7 @@ build command.
 
 ### The website build failed, what now?
 
-If the failure didnt happen during the kudu sync your website shouldn't be broken.
+If the failure didn't happen during the kudu sync your website shouldn't be broken.
 You can just hit the "retry" button in the Windows Azure Management backend and deploy again.
 Should the failure happen during the kudu sync then your website might be in a broken state.
 Try to redeploy as soon as you can to fix potential problems.

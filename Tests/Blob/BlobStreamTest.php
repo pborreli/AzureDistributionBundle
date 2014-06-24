@@ -192,7 +192,7 @@ class BlobTest extends BlobTestCase
         $this->assertEquals(1, count($blobClient->listContainers($options)->getContainers()));
     }
 
-    public function testMkdirMulptileLevelsNotAllowed()
+    public function testMkdirMultipleLevelsNotAllowed()
     {
         $containerName = $this->generateName();
 
