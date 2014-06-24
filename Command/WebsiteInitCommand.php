@@ -34,13 +34,19 @@ class WebsiteInitCommand extends ContainerAwareCommand
 
         $output->writeln('Copy Files for Windows Azure Websites deployment to project root:');
 
-        copy(__DIR__ . "/../Resources/private/websites/.deployment", $kernelRoot . "/.deployment");
+        copy(__DIR__ . "/../Resources/private/websites/.deployment", $kernelRoot . "/../.deployment");
         $output->writeln('[copy] .deployment');
 
-        copy(__DIR__ . "/../Resources/private/websites/build_azure.sh", $kernelRoot . "/build_azure.sh");
-        $output->writeln('[copy] build_azure.sh');
+        copy(__DIR__ . "/../Resources/private/websites/deploy.sh", $kernelRoot . "/../deploy.sh");
+        $output->writeln('[copy] deploy.sh');
 
-        copy(__DIR__ . "/../Resources/private/websites/.user.ini", $kernelRoot . "/.user.ini");
-        $output->writeln('[copy] .user.ini');
+        $output->writeln('Copy Files for IIS configuration into the front dir');
+        copy(__DIR__ . "/../Resources/private/websites/web/web.config", $kernelRoot . "/../web/web.config");
+        $output->writeln('[copy] web.config');
+
+        $output->writeln('Copy Files for Azure PHP configuration');
+        $fs = $this->getContainer()->get('filesystem');
+        $fs->mirror(__DIR__ . "/../Resources/private/websites/app/php", $kernelRoot . '/website');
+
     }
 }
